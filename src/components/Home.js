@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import Details from "./routes/details"
 
 const Home = (props) => {
   // const { msgAlert, user } = props
@@ -6,6 +8,7 @@ const Home = (props) => {
   const [allAnime, setAllAnime] = useState([])
   const [animeResults, setAnimeResults] = useState([])
   let [search, setSearch] = useState("")
+  
 
   useEffect(()=>{
 	  getAllAnime()
@@ -52,25 +55,26 @@ const Home = (props) => {
 	console.log(e)
   }
 
-  let showAllResults = animeResults.map((anime, key)=>{
-	  return (
-      <div>
-        <img
-          src={anime.image_url}
-          alt={anime.title}
-          width="200"
-          height="300"
-        ></img>
-        {anime.title}
-      </div>
-    )
-  })
+//   let showAllResults = animeResults.map((anime, key)=>{
+// 	  return (
+//       <div>
+//         <img
+//           src={anime.image_url}
+//           alt={anime.title}
+//           width="200"
+//           height="300"
+//         ></img>
+//         {anime.title}
+//       </div>
+//     )
+//   })
   
 
 
 
 
  let showAllAnime = allAnime.map((anime, key)=> {
+	 console.log('these are IDs', anime.mal_id)
 	return (
     <div>
       <img
@@ -80,7 +84,12 @@ const Home = (props) => {
         height="300"
       ></img>
       {anime.title}
-      {anime.synopsis}
+      {/* {anime.synopsis} */}
+      {/* <button value="See more >>">See more >></button> */}
+	  <li key={anime.mal_id}>
+		  <Link to={`/details/${anime.mal_id}`}>See More>></Link>
+	  </li>
+	  
     </div>
   )
  })
@@ -98,7 +107,8 @@ const Home = (props) => {
       </form>
       <h2>Home Page</h2>
       {showAllAnime}
-      {showAllResults}
+      {/* {showAllResults} */}
+	  <Details  animeId={showAllAnime}/>
     </>
   )
 }
