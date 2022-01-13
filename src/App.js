@@ -13,6 +13,7 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Details from './components/routes/details'
+import Profile from './components/routes/profile'
 
 const App = () => {
 
@@ -42,47 +43,60 @@ const App = () => {
 	}
 
 		return (
-			<Fragment>
-				<Header user={user} />
-				<Routes>
-					<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
-					<Route path='/details/:id' element={<Details />}/>
-					<Route
-						path='/sign-up'
-						element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
-					/>
-					<Route
-						path='/sign-in'
-						element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
-					/>
+      <Fragment>
+        <Header user={user} />
+        <Routes>
+          <Route path="/" element={<Home msgAlert={msgAlert} user={user} />} />
+          <Route path="/details/:id" element={<Details user={user} />}></Route>
           <Route
-            path='/sign-out'
+            path="/sign-up"
+            element={<SignUp msgAlert={msgAlert} setUser={setUser} />}
+          />
+          <Route
+            path="/sign-in"
+            element={<SignIn msgAlert={msgAlert} setUser={setUser} />}
+          />
+          <Route
+            path="/sign-out"
             element={
               <RequireAuth user={user}>
-                <SignOut msgAlert={msgAlert} clearUser={clearUser} user={user} />
+                <SignOut
+                  msgAlert={msgAlert}
+                  clearUser={clearUser}
+                  user={user}
+                />
               </RequireAuth>
             }
           />
           <Route
-            path='/change-password'
+            path="my-profile"
+            element={
+              <RequireAuth user={user}>
+                <Profile user={user} />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/change-password"
             element={
               <RequireAuth user={user}>
                 <ChangePassword msgAlert={msgAlert} user={user} />
-              </RequireAuth>}
+              </RequireAuth>
+            }
           />
-				</Routes>
-				{msgAlerts.map((msgAlert) => (
-					<AutoDismissAlert
-						key={msgAlert.id}
-						heading={msgAlert.heading}
-						variant={msgAlert.variant}
-						message={msgAlert.message}
-						id={msgAlert.id}
-						deleteAlert={deleteAlert}
-					/>
-				))}
-			</Fragment>
-		)
+        </Routes>
+        {msgAlerts.map((msgAlert) => (
+          <AutoDismissAlert
+            key={msgAlert.id}
+            heading={msgAlert.heading}
+            variant={msgAlert.variant}
+            message={msgAlert.message}
+            id={msgAlert.id}
+            deleteAlert={deleteAlert}
+          />
+        ))}
+      </Fragment>
+    )
 }
 
 export default App

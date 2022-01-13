@@ -8,16 +8,24 @@ const Home = (props) => {
   const [allAnime, setAllAnime] = useState([])
   const [animeResults, setAnimeResults] = useState([])
   let [search, setSearch] = useState("")
-  
+  let [year, setYear] = useState('2022')
+  let [season, setSeason] = useState('winter')
 
-  useEffect(()=>{
-	  getAllAnime()
-  },[])
+  // useEffect(()=>{
+	//   getAllAnime()
+  // },[])
 
+
+
+  //create two states, one for year and one for season
+  //default states will be the year and season of my choosing 
+  //handle change function to hold state (handleYear, handleSeason)
+  //
 
   //API call to get seasonal anime for home page
-  const getAllAnime = () =>{
-	  fetch(`https://api.jikan.moe/v3/season/2022/winter`)
+  const getAllAnime = (e) =>{
+    e.preventDefault()
+	  fetch(`https://api.jikan.moe/v3/season/${year}/${season}`)
 	  .then(response=>{
 		  return response.json()
 	  })
@@ -29,7 +37,14 @@ const Home = (props) => {
 	  .catch((error) => { 
 		console.log(error) })
   }
- 
+
+  const handleYear = (e) =>{
+    setYear(e.target.value)
+  }
+  
+  const handleSeason =(e)=>{
+    setSeason(e.target.value)
+  }
 
   //API call to get results of search 
   const searchAnime = (e) =>{
@@ -47,8 +62,6 @@ const Home = (props) => {
         console.log(error)
       })
   }
-   //console log e to find search
-  let animeTitle = ''
 
   const handleChange = (e) =>{
 	setSearch(e.target.value)
@@ -74,7 +87,7 @@ const Home = (props) => {
 
 
  let showAllAnime = allAnime.map((anime, key)=> {
-	 console.log('these are IDs', anime.mal_id)
+	//  console.log('these are IDs', anime.mal_id)
 	return (
     <div>
       <img
@@ -96,7 +109,23 @@ const Home = (props) => {
 
   return (
     <>
-      <form value={search} onSubmit={searchAnime}>
+      Select a Season<form onSubmit={getAllAnime}>
+        <select onChange={handleYear}>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+          <option value="2019">2019</option>
+          <option value="2018">2018</option>
+        </select>
+        <select onChange={handleSeason}>
+          <option value="winter">Winter</option>
+          <option value="spring">Spring</option>
+          <option value="summer">Summer</option>
+          <option value="fall">Fall</option>
+        </select>
+        <input type="submit"></input>
+      </form>
+      Search an Anime<form value={search} onSubmit={searchAnime}>
         <input
           type="text"
           id="animeSearch"
@@ -107,8 +136,9 @@ const Home = (props) => {
       </form>
       <h2>Home Page</h2>
       {showAllAnime}
+      <hr/>
       {/* {showAllResults} */}
-	  <Details  animeId={showAllAnime}/>
+      {/* <Details animeId={showAllAnime} user={props.user}/> */}
     </>
   )
 }
