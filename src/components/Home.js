@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Details from "./routes/details"
+import Form from 'react-bootstrap/Form'
+
 
 const Home = (props) => {
   // const { msgAlert, user } = props
@@ -89,26 +91,26 @@ const Home = (props) => {
  let showAllAnime = allAnime.map((anime, key)=> {
 	//  console.log('these are IDs', anime.mal_id)
 	return (
-    <div>
+    <div style={{"text-align": "center", "background-color": "salmon", "height": "700px"}}>
       <img
         src={anime.image_url}
         alt={anime.title}
-        width="200"
-        height="300"
-      ></img>
-      {anime.title}
+        width="400"
+        height="500"
+      ></img> 
+      <br/>
+      {anime.title}<br/>
       {/* {anime.synopsis} */}
       {/* <button value="See more >>">See more >></button> */}
-	  <li key={anime.mal_id}>
 		  <Link to={`/details/${anime.mal_id}`}>See More>></Link>
-	  </li>
+	
 	  
     </div>
   )
  })
 
   return (
-    <>
+    <div style={{"text-align": "center", "background-color": "salmon", "height": "fit-content", "font-size": "30px", }}>
       Select a Season<form onSubmit={getAllAnime}>
         <select onChange={handleYear}>
           <option value="2022">2022</option>
@@ -124,7 +126,8 @@ const Home = (props) => {
           <option value="fall">Fall</option>
         </select>
         <input type="submit"></input>
-      </form>
+      </form><br/>
+      OR <br/>
       Search an Anime<form value={search} onSubmit={searchAnime}>
         <input
           type="text"
@@ -134,12 +137,11 @@ const Home = (props) => {
         ></input>
         <input type="submit" value="Search"></input>
       </form>
-      <h2>Home Page</h2>
+      {/* <h2>Home Page</h2> */}
       {showAllAnime}
-      <hr/>
       {/* {showAllResults} */}
       {/* <Details animeId={showAllAnime} user={props.user}/> */}
-    </>
+    </div>
   )
 }
 

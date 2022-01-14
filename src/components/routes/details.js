@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
+import Collapse from "react-bootstrap/Collapse"
+import Button from "react-bootstrap/Button"
 
 function Details (props) {
  let params = useParams()
  const [details, setDetails]= useState({})
+ const [open, setOpen] = useState(false)
 //  const [urlParams, setUrlParams]=useState('')
  console.log('props in details', props)
  console.log('these are params', params.id)
@@ -67,25 +70,51 @@ const listAnime =(e)=>{
 //     )
 // })
 
+console.log('details', details)
  
  return (
-   <div>
+   <div style={{ "text-align": "center", "background-color": "salmon", "font-size": "50px",}}>
      <p>
        {details.title} / {details.title_english}
      </p>
      <img
        src={details.image_url}
        alt={details.title}
-       width="200"
-       height="300"
+       width="400"
+       height="500"
      ></img>
      <br />
      {details.premiered}
      <br />
-     <p> Score: {details.score}</p>
-     {details.synopsis}
+     Ranking: {details.rank}
      <br />
-     <button onClick={listAnime}>Add to List</button>
+      Score: {details.score}
+      <br/>
+     Episode length: {details.duration}
+     <br/>
+     When are new episodes?: {details.broadcast}
+     <br/>
+     <Button
+       variant="dark"
+       onClick={() => setOpen(!open)}
+       aria-controls="example-collapse-text"
+       aria-expanded={open}
+     >
+       Click to see Description
+     </Button>
+     <div style={{ minHeight: "150px" }}>
+       <Collapse in={open}>
+         <div id="example-collapse-text">
+           <card body style={{ width: "400px" }}>
+             {details.synopsis}
+           </card>
+         </div>
+       </Collapse>
+     </div>
+     
+     <Button variant="dark" onClick={listAnime}>
+       Add to List
+     </Button>
    </div>
  )
 }
