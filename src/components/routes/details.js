@@ -13,7 +13,7 @@ function Details (props) {
 
  useEffect(() => {
    getDetails()
- }, [])
+ }, )
 
 
 const getDetails = () =>{

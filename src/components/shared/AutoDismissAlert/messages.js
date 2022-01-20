@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default {
 	signUpSuccess: "Successfully registered! You've been signed in as well.",
 	signUpFailure:"Registration failed. Email may be taken, or passwords don't match.",
