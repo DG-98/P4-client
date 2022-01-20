@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom"
-import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Collapse from "react-bootstrap/Collapse"
 import Button from "react-bootstrap/Button"

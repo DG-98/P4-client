@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, } from "react"
 import { Link } from "react-router-dom"
-import Details from "./routes/details"
-import Form from 'react-bootstrap/Form'
+// import Details from "./routes/details"
+// import Form from 'react-bootstrap/Form'
 
 
 const Home = (props) => {
   // const { msgAlert, user } = props
   console.log("props in home", props)
   const [allAnime, setAllAnime] = useState([])
-  const [animeResults, setAnimeResults] = useState([])
+  // const [animeResults, setAnimeResults] = useState([])
   let [search, setSearch] = useState("")
   let [year, setYear] = useState('2022')
   let [season, setSeason] = useState('winter')
@@ -102,7 +102,7 @@ const Home = (props) => {
       {anime.title}<br/>
       {/* {anime.synopsis} */}
       {/* <button value="See more >>">See more >></button> */}
-		  <Link to={`/details/${anime.mal_id}`}>See More>></Link>
+		  <Link to={`/details/${anime.mal_id}`}>See More</Link>
 	
 	  
     </div>
