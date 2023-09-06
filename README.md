@@ -9,7 +9,7 @@ React: I decided on React for this project to refine my skills with front-end de
 
 MongoDB: The amazing part of MongoDB when it came to this project was the ability to adjust and change models on the fly especially when you're not sure exactly what data you might need when it comes to calling in a sizable amount of information from an API.
 
-Express: I used express for the ease of creating routes and due to my back experience using it.
+Express: I used express for the ease of creating routes and due to my experience using it.
 
 ## User Stories
 The goal for this app was to be a comparison to the popular website MyAnimeList. Someone using this website at the very least would want the ability to search an anime of their choosing and view info about their search. 
